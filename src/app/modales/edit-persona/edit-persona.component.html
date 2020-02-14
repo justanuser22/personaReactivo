@@ -1,0 +1,120 @@
+<div class="modal fade" id="editPerson" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Editar Persona
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editPersona="ngForm" (ngSubmit)="onEditPersona(editPersona)"> <!--Preparando para usar Formularios Template-->
+                    <div class="form-row">
+                        <input type="hidden" name="id" [(ngModel)]="this.servicio.punteroPersona.id">
+                    </div>
+                    <div class="form-row">
+                        <label class="float-md-left" for="apellido">Apellido:</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido"
+                            [(ngModel)]="this.servicio.punteroPersona.apellido" required [pattern]="aYnPattern"
+                            minlength="3" #uapellido="ngModel">
+                        <div class="alert alert-danger">
+                            <div *ngIf="uapellido.errors?.required">
+                                Es necesario el apellido
+                            </div>
+                            <div *ngIf="uapellido.errors?.pattern">
+                                Primera letra mayúscula,segunda minúscula. Sin números!
+                            </div>
+                            <div *ngIf="uapellido.errors?.minlength">
+                                Mínimo 3 letras.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="float-md-left" for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre"
+                            [(ngModel)]="this.servicio.punteroPersona.nombre" required [pattern]="aYnPattern"
+                            minlength="3" #unombre="ngModel">
+                        <div class="alert alert-danger">
+                            <div *ngIf="unombre.errors?.required">
+                                Es necesario el nombre.
+                            </div>
+                            <div *ngIf="unombre.errors?.pattern">
+                                Primera letra mayúscula,segunda minúscula. Sin números!
+                            </div>
+                            <div *ngIf="unombre.errors?.minlength">
+                                Mínimo 3 letras.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label class="float-md-left" for="dni">Dni:</label>
+                        <input type="text" class="form-control" id="dni" name="dni" required
+                            [(ngModel)]="this.servicio.punteroPersona.dni" minlength="8" maxlength="8" #udni="ngModel">
+                        <div class="alert alert-danger">
+                            <div *ngIf="udni.errors?.required">
+                                Es necesario el dni.
+                            </div>
+                            <div *ngIf="udni.errors?.minlength">
+                               Si o si 8 dígitos.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Close</button> <!--Llamamos al botón btnClose-->
+                        <button type="submit" class="btn btn-primary" [disabled]="!editPersona.valid">Save changes</button> <!--Si los campos no están correctos, no se podrá guardar!-->
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--
+
+    <div class="modal fade" id="editPerson" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Editar Persona
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editPersona="ngForm" (ngSubmit)="onEditPersona(editPersona); editPersona.reset()">
+                    <div class="form-row">
+                        <input type="hidden" name="id" [(ngModel)]="this.servicio.punteroPersona.id">
+                    </div>
+                    <div class="form-row">
+                        <label class="float-md-left" for="apellido">Apellido:</label>
+                        <input type="text" class="form-control" name="apellido"
+                            [(ngModel)]="this.servicio.punteroPersona.apellido">
+                    </div>
+                    <div class="form-row">
+                        <label class="float-md-left" for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" required
+                            [(ngModel)]="this.servicio.punteroPersona.nombre">
+                    </div>
+                    <div class="form-row">
+                        <label class="float-md-left" for="dni">Dni:</label>
+                        <input type="text" class="form-control" name="dni"
+                            [(ngModel)]="this.servicio.punteroPersona.dni">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" #btnClose data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+-->

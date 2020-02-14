@@ -1,0 +1,69 @@
+<div class="modal fade" id="newPerson" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Nueva Persona
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="personaFrom" (ngSubmit)="onSaveForm()"> <!--Para modelar nuestro formulario reactivo con sus validaciones-->
+                    <div class="form-row">
+                        <label class="float-md-left" for="apellido">Apellido:</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{'is-invalid' : !personaFrom.get('apellido').valid}" formControlName="apellido">
+                        <div *ngIf="personaFrom.controls['apellido'].errors?.required" class="invalid-feedback">
+                            El apellido es necesario.
+                        </div>
+                        <div *ngIf="personaFrom.controls['apellido'].errors?.pattern" class="invalid-feedback">
+                            Primera letra con mayúscula, la segunda con minúscula. Nada de números!
+                        </div>
+                        <div *ngIf="personaFrom.controls['apellido'].errors?.minlength" class="invalid-feedback">
+                            Mínimo 3 letras.
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <label class="float-md-left" for="nombre">Nombre:</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{'is-invalid' : !personaFrom.get('nombre').valid}" formControlName="nombre">
+                        <div *ngIf="personaFrom.controls['nombre'].errors?.required" class="invalid-feedback">
+                            El Nombre es necesario.
+                        </div>
+                        <div *ngIf="personaFrom.controls['nombre'].errors?.pattern" class="invalid-feedback">
+                            Primera letra con mayúscula, la segunda con minúscula. Nada de números!
+                        </div>
+                        <div *ngIf="personaFrom.controls['nombre'].errors?.minlength" class="invalid-feedback">
+                            Mínimo 3 letras.
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <label class="float-md-left" for="dni">DNI:</label>
+                        <input type="text" class="form-control"
+                            [ngClass]="{'is-invalid' : !personaFrom.get('dni').valid}" formControlName="dni">
+                        <div *ngIf="personaFrom.controls['dni'].errors?.required" class="invalid-feedback">
+                            El DNI es necesario.
+                        </div>
+                        <div *ngIf="personaFrom.controls['dni'].errors?.minlength" class="invalid-feedback">
+                            Mínimo 8 números.
+                        </div>
+                        <div *ngIf="personaFrom.controls['dni'].errors?.maxlength" class="invalid-feedback">
+                            Máximo 8 números.
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            (click)="limpiarModal()">Close</button> <!--Al clickear borramos el modal-->
+                        <button type="submit" class="btn btn-primary" [disabled]="!personaFrom.valid">Guardar</button> <!--Obviamente los campos deben de estar correctos para que guarde los datos.-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,40 @@
+<section class="row mt-5">
+    <div class="col">
+        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#newPerson">Nueva
+            Persona</button>
+        <table class="table table-hover">
+            <!--Al dar click en 'Nueva Persona' se abrirá el modal perteneciente a 'newPerson'-->
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Dni</th>
+                    <th scope="col">Acción '1'</th>
+                    <th scope="col">Acción '2'</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let persona of personas">
+                    <th scope="row">{{persona.id}}</th>
+                    <td>{{persona.apellido}}</td>
+                    <td>{{persona.nombre}}</td>
+                    <td>{{persona.dni}}</td>
+                    <td>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#editPerson"
+                            (click)="onPreUpdate(persona)">Actualizar</button>
+                        <!--Al dar click podremos alojar en los distintos campos los valores ya existentes, para luego editar. También nos abrirá el modal de editPersona-->
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="delete(persona.id)">Eliminar</button>
+                        <!--Clickeamos y eliminamos-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<app-agregar-persona></app-agregar-persona>
+<!--Selector necesario para la comunicación entre componentes y de esta manera abrir el modal-->
+<app-edit-persona></app-edit-persona>
+<!--Selector necesario para la comunicación entre componentes y de esta manera abrir el modal-->
